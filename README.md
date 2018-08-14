@@ -1,6 +1,8 @@
-# mobilepay_appswitch
+# Flutter plugin for MobilePay AppSwitch SDK
 
-A new flutter plugin project.
+This is an unofficial Flutter plugin wrapping the MobilePay AppSwitch libraries for iOS and Android to enable Flutter apps to use the MobilePay AppSwitch SDK.
+
+> This plugin is not developed, published or otherwise affiliated with Danske Bank or MobilePay, but is a private project released "as-is" to the public by the author.  
 
 ## Getting Started
 
