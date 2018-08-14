@@ -6,3 +6,6 @@
 .DS_Store
 /build
 /captures
+
+libs/*-javadoc.jar
+libs/*-javadoc
