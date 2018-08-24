@@ -13,10 +13,10 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>grauit_mobilepay_appswitch</string>
+				<string>mobilepayappswitchexample</string>
 			</array>
 			<key>CFBundleURLName</key>
-			<string>dk.grauit.mobilepay_appswitch_example</string>
+			<string>dk.grauit.mobilepayAppswitchExample</string>
 		</dict>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>

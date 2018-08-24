@@ -1,8 +1,12 @@
 name: mobilepay_appswitch
-description: A new flutter plugin project.
-version: 0.0.1
-author:
-homepage:
+description: A flutter plugin for MobilePay's AppSwitch SDK
+version: 0.0.2
+author: Mads Grau Kristensen <mgk@grauit.dk>
+homepage: https://github.com/MechaGK/mobilepay_appswitch
+
+environment:
+  sdk: '>=1.19.0 <3.0.0'
+  flutter: ^0.5.1
 
 dependencies:
   flutter:

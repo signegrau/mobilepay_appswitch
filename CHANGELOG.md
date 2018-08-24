@@ -1,3 +1,7 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - 24. august 2018.
 
-* TODO: Describe initial release.
+* Fixed wrong return type in init.
+
+## [0.0.1] - 24. august 2018.
+
+* Support on Android for essential SDK features.

@@ -78,10 +78,14 @@ class MobilepayAppswitchPlugin(private val mRegistrar: Registrar) : MethodCallHa
       "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
       "init" -> {
         val country = countryMap[call.argument<String>("country")]
+        val merchantId = call.argument<String>("merchantId")
         if (country == null) {
           result.error("Invalid country", "Country is invalid", call.argument<String>("country"))
+        } else if (merchantId == null) {
+          result.error("Invalid merchant id", "Merchant id is invalid", call.argument<String>("merchantId"))
         } else {
-          result.success(init(call.argument<String>("merchantId"), country))
+          init(merchantId, country)
+          result.success("Success")
         }
       }
       "makePayment" -> {

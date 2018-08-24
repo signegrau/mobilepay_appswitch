@@ -51,9 +51,9 @@ class PaymentError {
 
   factory PaymentError.fromPlatformException(PlatformException e) {
     return PaymentError(
-      errorType: errorTypeMap[e.code], 
-      errorMessage: e.message, 
-      errorCode: e.code);
+        errorType: errorTypeMap[e.code],
+        errorMessage: e.message,
+        errorCode: e.code);
   }
 }
 
@@ -99,16 +99,19 @@ class MobilepayAppswitch {
     return version;
   }
 
-  static Future<void> init(String merchantId,
-      [Country country = Country.DENMARK]) async {
+  static Future<void> init(
+      {String merchantId,
+      Country country = Country.DENMARK,
+      String urlScheme = ''}) async {
     await _channel.invokeMethod('init', <String, dynamic>{
       'merchantId': merchantId,
+      'urlScheme': urlScheme,
       'country': countryMap[country]
     });
   }
 
   static Future<PaymentResponse> makePayment(
-      String orderId, double price) async {
+      {String orderId, double price}) async {
     try {
       final dynamic result = await _channel.invokeMethod(
           'makePayment', <String, dynamic>{'orderId': orderId, 'price': price});
@@ -119,9 +122,7 @@ class MobilepayAppswitch {
     } catch (e) {
       if (e is PlatformException) {
         return PaymentResponse(
-          orderId: orderId,
-          error: PaymentError.fromPlatformException(e)
-          );
+            orderId: orderId, error: PaymentError.fromPlatformException(e));
       }
 
       throw e;

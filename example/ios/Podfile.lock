@@ -6,7 +6,7 @@ PODS:
     - MobilePay-AppSwitch-SDK
 
 DEPENDENCIES:
-  - Flutter (from `.symlinks/flutter/ios`)
+  - Flutter (from `.symlinks/flutter/ios-release`)
   - mobilepay_appswitch (from `.symlinks/plugins/mobilepay_appswitch/ios`)
 
 SPEC REPOS:
@@ -15,7 +15,7 @@ SPEC REPOS:
 
 EXTERNAL SOURCES:
   Flutter:
-    :path: ".symlinks/flutter/ios"
+    :path: ".symlinks/flutter/ios-release"
   mobilepay_appswitch:
     :path: ".symlinks/plugins/mobilepay_appswitch/ios"
 
@@ -24,6 +24,6 @@ SPEC CHECKSUMS:
   MobilePay-AppSwitch-SDK: 6ed36faad59e4cdd1bc8f8fde8f4a9f2d1e4cb2c
   mobilepay_appswitch: 2cdbdbd994620ae7af16b3de23cd83eca05c5116
 
-PODFILE CHECKSUM: 66b7b23a9942ad761ed4913fad82be13829bec7c
+PODFILE CHECKSUM: d668460da70f84acad696469b84877bb1d004c5a
 
 COCOAPODS: 1.5.3

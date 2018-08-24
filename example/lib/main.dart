@@ -9,8 +9,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String _platformVersion = 'Unknown';
-
   @override
   initState() {
     super.initState();
@@ -18,7 +16,10 @@ class _MyAppState extends State<MyApp> {
   }
 
   initAppSwitch() async {
-    await MobilepayAppswitch.init("APPDK0000000000", Country.DENMARK);
+    await MobilepayAppswitch.init(
+      merchantId: "APPDK0000000000", 
+      country: Country.DENMARK,
+      urlScheme: 'mobilepayappswitchexample');
   }
 
   @override
@@ -30,7 +31,7 @@ class _MyAppState extends State<MyApp> {
 class PaymentTest extends StatelessWidget {
   makePayment(BuildContext context, double price) async {
     PaymentResponse paymentResponse =
-        await MobilepayAppswitch.makePayment("TESTINGS_ID", price);
+        await MobilepayAppswitch.makePayment(orderId: "TESTINGS_ID", price: price);
 
     if (paymentResponse.success) {
       showDialog(

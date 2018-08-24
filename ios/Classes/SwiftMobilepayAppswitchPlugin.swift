@@ -7,6 +7,7 @@ public class SwiftMobilepayAppswitchPlugin: NSObject, FlutterPlugin {
         let instance = SwiftMobilepayAppswitchPlugin()
         
         registrar.addMethodCallDelegate(instance, channel: channel)
+        registrar.addApplicationDelegate(instance)
     }
     
     private static var currentResult: FlutterResult? = nil
@@ -24,32 +25,42 @@ public class SwiftMobilepayAppswitchPlugin: NSObject, FlutterPlugin {
                       "NORWAY": MobilePayCountry.norway]
     
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
-        (call.arguments as? Dictionary<String, String>).map { args in
+        if let args = call.arguments as? Dictionary<String, Any> {
             switch call.method {
             case "init":
-                
-                if let merchantId = args["merchantId"], let country = args["country"].flatMap({countryMap[$0]}), let merchantUrlScheme = args["urlScheme"] {
+                if let merchantId = args["merchantId"] as? String, let country = (args["country"] as? String).flatMap({countryMap[$0]}), let merchantUrlScheme = args["urlScheme"] as? String {
                     MobilePayManager.sharedInstance().setup(withMerchantId: merchantId, merchantUrlScheme: merchantUrlScheme, country: country)
+                } else {
+                    result(FlutterError(code: "255", message: "Invalid arguments for init", details: args))
                 }
                 break
-            case "makepayment":
-                if let orderId = args["orderId"], let price = args["price"].flatMap({Float($0)}) {
+            case "makePayment":
+                if let orderId = args["orderId"] as? String, let price = args["price"] as? Float {
                     if let payment = MobilePayPayment.init(orderId: orderId, productPrice: price) {
+                        print("hi")
                         SwiftMobilepayAppswitchPlugin.setResult(result: result)
                         MobilePayManager.sharedInstance().beginMobilePayment(with: payment, error: { (error: NSError) -> Void in
+                            print("wat")
                             result(FlutterError.init(code: String(error.code), message: error.localizedDescription, details: error))
                             } as? MobilePayPaymentErrorBlock)
                     }
+                } else {
+                    result(FlutterError(code: "255", message: "Invalid arguments for makePayment", details: args))
                 }
                 break
             default:
+                result(FlutterMethodNotImplemented)
                 break;
             }
         }
-        result(FlutterMethodNotImplemented)
     }
     
-    public func handleMobilePayPaymentWithUrl(url: URL) {
+    public static func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
+        SwiftMobilepayAppswitchPlugin.handleMobilePayPayment(with: url)
+        return true
+    }
+    
+    public static func handleMobilePayPayment(with url: URL) {
         MobilePayManager.sharedInstance().handleMobilePayPayment(with: url, success: { (successfulPayment) in
             if let res = successfulPayment {
                 if let result = SwiftMobilepayAppswitchPlugin.getResult() {
