@@ -18,6 +18,7 @@ import dk.danskebank.mobilepay.sdk.model.FailureResult
 import dk.danskebank.mobilepay.sdk.model.SuccessResult
 import android.R.attr.data
 import android.util.Base64
+import dk.danskebank.mobilepay.sdk.CaptureType
 import dk.danskebank.mobilepay.sdk.ResultCallback
 import java.util.*
 
@@ -91,8 +92,9 @@ class MobilepayAppswitchPlugin(private val mRegistrar: Registrar) : MethodCallHa
       "makePayment" -> {
         val orderId = call.argument<String>("orderId")
         val price = BigDecimal(call.argument<Double>("price"))
+        val captureType = call.argument<String?>("captureType")
 
-        makePayment(orderId, price, result)
+        makePayment(orderId, price,captureType ?: "Y", result)
       }
       else -> result.notImplemented()
     }
@@ -102,10 +104,19 @@ class MobilepayAppswitchPlugin(private val mRegistrar: Registrar) : MethodCallHa
     MobilePay.getInstance().init(merchantId, country)
   }
 
-  fun makePayment(orderId: String, price: BigDecimal, result: Result) {
+  fun makePayment(orderId: String, price: BigDecimal, captureType: String, result: Result) {
     latestRequestCode++
 
     requestMap[latestRequestCode] = result
+
+    val captureType = when(captureType) {
+      "Y" -> CaptureType.CAPTURE
+      "N" -> CaptureType.RESERVE
+      "P" -> CaptureType.RESERVE
+      else -> CaptureType.CAPTURE
+    }
+
+    MobilePay.getInstance().captureType = captureType
 
     val context = getActiveContext()
 

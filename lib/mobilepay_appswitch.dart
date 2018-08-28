@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 
 enum Country { DENMARK, NORWAY, FINLAND }
+enum CaptureType { CAPTURE, PARTIAL_CAPTURE, RESERVE }
 
 /* 
  * Check out https://github.com/MobilePayDev/MobilePay-AppSwitch-SDK
@@ -91,6 +92,12 @@ class MobilepayAppswitch {
     Country.NORWAY: 'NORWAY'
   };
 
+  static Map<CaptureType, String> captureTypeMap = {
+    CaptureType.CAPTURE: 'Y',
+    CaptureType.PARTIAL_CAPTURE: 'P',
+    CaptureType.RESERVE: 'N'
+  };
+
   static const MethodChannel _channel =
       const MethodChannel('mobilepay_appswitch');
 
@@ -111,10 +118,16 @@ class MobilepayAppswitch {
   }
 
   static Future<PaymentResponse> makePayment(
-      {String orderId, double price}) async {
+      {String orderId,
+      double price,
+      CaptureType captureType = CaptureType.CAPTURE}) async {
     try {
       final dynamic result = await _channel.invokeMethod(
-          'makePayment', <String, dynamic>{'orderId': orderId, 'price': price});
+          'makePayment', <String, dynamic>{
+        'orderId': orderId,
+        'price': price,
+        'captureType': captureTypeMap[captureType]
+      });
 
       final dynamic data = jsonDecode(result);
 
