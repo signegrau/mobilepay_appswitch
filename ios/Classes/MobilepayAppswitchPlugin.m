@@ -7,6 +7,7 @@
                                      binaryMessenger:[registrar messenger]];
     MobilepayAppswitchPlugin* instance = [[MobilepayAppswitchPlugin alloc] init];
     [registrar addMethodCallDelegate:instance channel:channel];
+    [registrar addApplicationDelegate:instance];
 }
 
 static FlutterResult currentResult = nil;
@@ -54,7 +55,8 @@ static MobilePayCountry *mobilePayCountry = nil;
     }
 }
 
-+ (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+    NSLog(@"hello mobilepay!");
     return [MobilepayAppswitchPlugin handleMobilePayPaymentWithUrl:url];
 }
 
