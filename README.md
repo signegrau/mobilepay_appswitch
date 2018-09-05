@@ -4,9 +4,8 @@ This is an unofficial Flutter plugin wrapping the MobilePay AppSwitch libraries 
 
 > This plugin is not developed, published or otherwise affiliated with Danske Bank or MobilePay, but is a private project released "as-is" to the public by the author.  
 
-## Getting Started
+## Limitations
 
-For help getting started with Flutter, view our online
-[documentation](https://flutter.io/).
+Some pararmeters are not supported like accepted url. But the essentials should work well.
 
-For help on editing plugin code, view the [documentation](https://flutter.io/platform-plugins/#edit-code).
+And iOS is not supported... yet.

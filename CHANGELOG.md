@@ -1,3 +1,7 @@
+## [0.8.1] - 30. august 2018
+
+* Fixed pubspec.yaml to allow higher Flutter versions
+
 ## [0.8.0] - 28. august 2018
 
 * Added support for settings capture type
