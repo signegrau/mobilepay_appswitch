@@ -45,7 +45,7 @@ class PaymentTest extends StatelessWidget {
           context: context,
           builder: (_) => AlertDialog(
                 title: Text("Failed to complete payment"),
-                content: Text(paymentResponse.error.errorMessage),
+                content: Text("${paymentResponse.error.errorMessage}\nError code: ${paymentResponse.error.errorCode}"),
               ));
     }
   }

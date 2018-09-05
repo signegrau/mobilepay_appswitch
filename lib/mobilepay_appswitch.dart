@@ -24,7 +24,8 @@ enum MobilePayErrorTypes {
   ORDER_ID_ALREADY_USED,
   MOBILEPAY_USER_FRAUD_SCREENING,
   /* Custom error, not MobilePay official */
-  TRANSACTION_CANCELLED
+  TRANSACTION_CANCELLED,
+  MOBILEPAY_APP_UNAVAILABLE
 }
 
 Map<String, MobilePayErrorTypes> errorTypeMap = {
@@ -40,7 +41,9 @@ Map<String, MobilePayErrorTypes> errorTypeMap = {
   "9": MobilePayErrorTypes.INVALID_SIGNATURE,
   "10": MobilePayErrorTypes.APPSWITCH_SDK_OUT_OF_DATE,
   "11": MobilePayErrorTypes.ORDER_ID_ALREADY_USED,
-  "12": MobilePayErrorTypes.MOBILEPAY_USER_FRAUD_SCREENING
+  "12": MobilePayErrorTypes.MOBILEPAY_USER_FRAUD_SCREENING,
+  "100": MobilePayErrorTypes.TRANSACTION_CANCELLED,
+  "1001": MobilePayErrorTypes.MOBILEPAY_APP_UNAVAILABLE,
 };
 
 class PaymentError {
