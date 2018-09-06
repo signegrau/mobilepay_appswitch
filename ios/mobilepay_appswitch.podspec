@@ -3,7 +3,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'mobilepay_appswitch'
-  s.version          = '0.8.1'
+  s.version          = '0.9.0'
   s.summary          = 'A new flutter plugin project.'
   s.description      = <<-DESC
 A new flutter plugin project.
