@@ -90,8 +90,8 @@ class MobilepayAppswitchPlugin(private val mRegistrar: Registrar) : MethodCallHa
         }
       }
       "makePayment" -> {
-        val orderId = call.argument<String>("orderId")
-        val price = BigDecimal(call.argument<Double>("price"))
+        val orderId = call.argument<String>("orderId")!!
+        val price = BigDecimal(call.argument<Double>("price")!!)
         val captureType = call.argument<String?>("captureType")
 
         makePayment(orderId, price,captureType ?: "Y", result)
